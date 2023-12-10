@@ -1,6 +1,9 @@
 // Import required packages
 const inquirer = require('inquirer');
 const fs = require('fs');
+const Triangle = require("./lib/triangle");
+const Circle = require('./lib/circle');
+const Square = require('./lib/square');
 
 
 // GIVEN a command-line application that accepts user input
@@ -52,23 +55,27 @@ inquirer.prompt([
 ])
 .then((input)=> {
     console.log(input);
-})
+    const shapes = {
+        Square: Square,
+        Circle: Circle,
+        Triangle: Triangle
+    };
+
+    // Create shape from input
+    const logoShape = new shapes[input.shape](input.shapeColor);
+    const shapeString = 
+`<svg version="1.1"
+width="300" height="200"
+xmlns="http://www.w3.org/2000/svg">
+
+ <rect width="100%" height="100%" fill="white" />
+
+ ${logoShape.render()}
+
+ <text x="150" y="125" font-size="50" text-anchor="middle" fill="${input.textColor}">${input.text}</text>
+
+</svg>`;
 
 
-
-// WHEN I have entered input for all the prompts
-// THEN an SVG file is created named `logo.svg`
-// AND the output text "Generated logo.svg" is printed in the command line
-// WHEN I open the `logo.svg` file in a browser
-// THEN I am shown a 300x200 pixel image that matches the criteria I entered
-
-
-//****** DONE ******
-// WHEN I am prompted for text
-// THEN I can enter up to three characters
-// WHEN I am prompted for the text color
-// THEN I can enter a color keyword (OR a hexadecimal number)
-// WHEN I am prompted for a shape
-// THEN I am presented with a list of shapes to choose from: circle, triangle, and square
-// WHEN I am prompted for the shape's color
-// THEN I can enter a color keyword (OR a hexadecimal number)
+    fs.writeFile('./logo.svg',shapeString, (err) => err ? console.log(err) : console.log("Logo Created."));
+});
