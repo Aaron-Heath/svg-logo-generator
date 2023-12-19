@@ -1,6 +1,6 @@
 # SVG Logo Generator
 ## Description
-This application is a command line interface (CLI) tool that allows the user to generate a simple SVG logo using command line prompts.
+This application is a command line interface (CLI) tool that allows the user to generate a simple SVG logo using command line prompts. A video demonstration of the application can be found [here](https://drive.google.com/drive/u/0/folders/18NvgRYWB3h8CSICx-V8k8tjTC9fSr8xA).
 
 
 ## Installation
